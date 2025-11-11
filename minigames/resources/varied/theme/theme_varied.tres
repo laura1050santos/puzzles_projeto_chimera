@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="QuizTheme" load_steps=3 format=3 uid="uid://d07ugff65uoxe"]
+
+[ext_resource type="Script" uid="uid://dpslegksserf0" path="res://Scripts/resources/theme.gd" id="1_5gg2b"]
+[ext_resource type="Script" uid="uid://bqdbclg4egr3g" path="res://Scripts/resources/question.gd" id="2_1ffxt"]
+
+[resource]
+script = ExtResource("1_5gg2b")
+theme = Array[ExtResource("2_1ffxt")]([null, null])
+metadata/_custom_type_script = "uid://dpslegksserf0"

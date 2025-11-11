@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="QuizQuestion" load_steps=2 format=3 uid="uid://co06ku2pnc7d"]
+
+[ext_resource type="Script" uid="uid://bqdbclg4egr3g" path="res://Scripts/resources/question.gd" id="1_m44vl"]
+
+[resource]
+script = ExtResource("1_m44vl")
+question_info = "quanto é 15+4?"
+type = 0
+options = Array[String](["11", "12", "20", "19"])
+correct = ""
+metadata/_custom_type_script = "uid://bqdbclg4egr3g"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="QuizQuestion" load_steps=2 format=3 uid="uid://bhr5ce0iyfd48"]
+
+[ext_resource type="Script" uid="uid://bqdbclg4egr3g" path="res://Scripts/resources/question.gd" id="1_pmmae"]
+
+[resource]
+script = ExtResource("1_pmmae")
+question_info = "Quanto é 100 - 45?"
+type = 0
+options = Array[String](["65", "55", "45", "145"])
+correct = ""
+metadata/_custom_type_script = "uid://bqdbclg4egr3g"
