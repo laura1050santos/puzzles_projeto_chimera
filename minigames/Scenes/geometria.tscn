@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://vrv12gq8ug5l"]
 
-[ext_resource type="Script" uid="uid://85ryxb6tsc6q" path="res://Scripts/controllers/geometria.gd" id="1_6ul76"]
+[ext_resource type="Script" uid="uid://85ryxb6tsc6q" path="res://Scripts/controllers/Quiz.gd" id="1_6ul76"]
 
-[node name="Geometria_game" type="CanvasLayer"]
+[node name="Quiz" type="CanvasLayer"]
 script = ExtResource("1_6ul76")
 
 [node name="content" type="Control" parent="."]
@@ -37,13 +37,13 @@ anchor_left = 0.492
 anchor_top = 1.0
 anchor_right = 0.492
 anchor_bottom = 1.0
-offset_left = 533.216
-offset_top = -95.0
-offset_right = 1595.22
-offset_bottom = 30.0
+offset_left = -514.784
+offset_top = -247.0
+offset_right = 547.22
+offset_bottom = -122.0
 grow_horizontal = 2
 grow_vertical = 0
-rotation = -3.14159
+rotation = -6.27983
 theme_override_constants/separation = 10
 
 [node name="Button" type="Button" parent="content/QuestionHolder"]

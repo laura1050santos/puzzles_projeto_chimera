@@ -20,5 +20,9 @@ func gerar_pergunta_por_tema(tema:int):
 			i = randi_range(0, 9)
 			data = BddProbabilidade.gerar_pergunta(i)
 			return data
+		3: 
+			i = randi_range(0,9)
+			data= BddArit.gerar_pergunta_aritmetica(i)
+			return data
 			
 	
