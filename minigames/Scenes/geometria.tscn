@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://3bm7ql03endm"]
+[gd_scene load_steps=2 format=3 uid="uid://vrv12gq8ug5l"]
 
-[ext_resource type="Script" uid="uid://13rq2cid67do" path="res://Scripts/controllers/game_controller.gd" id="1_6ul76"]
+[ext_resource type="Script" uid="uid://85ryxb6tsc6q" path="res://Scripts/controllers/geometria.gd" id="1_6ul76"]
 
 [node name="Geometria_game" type="CanvasLayer"]
 script = ExtResource("1_6ul76")
@@ -29,29 +29,6 @@ text = "Pergunta"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
-
-[node name="ImageHolder" type="Panel" parent="content/Question_info"]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-
-[node name="QuestionImage" type="TextureRect" parent="content/Question_info/ImageHolder"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="content/Question_info/ImageHolder"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-expand = true
-
-[node name="Audio" type="AudioStreamPlayer2D" parent="content/Question_info/ImageHolder"]
 
 [node name="QuestionHolder" type="HBoxContainer" parent="content"]
 layout_mode = 1
@@ -88,3 +65,15 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="content"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -1.0
+offset_top = -3.0
+offset_right = 1163.0
+offset_bottom = 651.0
+mouse_filter = 2
+color = Color(0.187618, 0.246422, 0.437281, 1)
+
+[connection signal="pressed" from="content/QuestionHolder/Button" to="." method="_on_button_pressed"]
