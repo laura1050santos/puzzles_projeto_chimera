@@ -1,0 +1,196 @@
+[gd_scene load_steps=3 format=3 uid="uid://ts6vwlffw6uj"]
+
+[sub_resource type="GDScript" id="GDScript_rnpmt"]
+script/source = "extends Node2D
+var b
+var a 
+var operacao = [\"+\",\"-\",\"x\", \"/\"]
+@onready var pergunta = $CanvasLayer/Control/Panel/Label
+@onready var botao1 = $CanvasLayer/Control/buttons_content/Button
+@onready var botao2 = $CanvasLayer/Control/buttons_content/Button2
+@onready var botao3 = $CanvasLayer/Control/buttons_content/Button3
+@onready var botao4 =  $CanvasLayer/Control/buttons_content/Button4
+var botoes =[]
+
+var resultado 
+var pontos : float
+#para as perguntas-> função que gera os numeros e coloca no label
+#para as respostas -> s3 ou 4 botões com numeros aleatorios proximos ao da resposta
+#se a resposta estiver certa-> add pontos ao multiplicador e passa pra proxima pergunta
+#se estiver errada -> fecha a janela e encerra, retornando o valor do multiplicador 
+
+# Called when the node enters the scene tree for the first time.
+
+	 # Replace with function body.
+
+func _ready() -> void:
+	botoes.append(botao1)
+	botoes.append(botao2)
+	botoes.append(botao3)
+	botoes.append(botao4)
+
+	for i in botoes.size():
+		botoes[i].pressed.connect(func():
+			_on_botao_pressed(botoes[i])
+		)
+
+
+func _on_start_pressed() -> void:
+ # Replace with function body.
+	pergunta.text = \"\"
+	$CanvasLayer/Control/start.queue_free()
+	comecar_jogo()
+	
+func comecar_jogo():
+		$CanvasLayer/Control/buttons_content.visible = true
+		print(\"pontuação atual: \", pontos)
+
+		var op = operacao[randi_range(0,3)]
+		#conta(faz a conta com a operacao e os numeros aleatorios)
+		var c = conta(op)
+		#cria a pergunta
+		perguntar(op)
+		#gerar_botoes_resposta_cria os botoes para responder
+		botoes = gerar_botoes_resposta(c)
+	
+	 # Replace with function body.
+func perguntar(op:String) -> void:
+	pergunta.text = \"quanto é: %d %s %d?\" % [a,op ,b]
+	
+func conta(op_math):
+	a = randi_range(30,50)
+	b =randi_range(1,20)
+	match op_math:
+			\"+\":
+				resultado = a+b
+			\"-\":
+				resultado = a-b
+			\"x\":
+				resultado = a*b
+			\"/\":
+				while a % b != 0:
+					a = randi_range(30, 50)
+					b = randi_range(1, 20)
+				resultado = a / b
+	return resultado
+		 			
+func gerar_botoes_resposta(result):
+	var posicao = randi_range(0,3)
+	var valores_usados =[result]
+
+	for i in range(4):
+		var aux = 0
+		if posicao == i:
+			botoes[i].text =str(result)
+			aux =  result
+		else: 
+			while true:
+				var off_set = randi_range(-5,5)
+				print(off_set)
+				aux = result + off_set
+				if( off_set == 0 and not aux in valores_usados):
+					pass
+				else: 
+					break
+			valores_usados.append(aux)
+			botoes[i].text = str(aux)
+	return botoes
+	
+
+func limpar_botoes(botoes):
+	for i in range(0, botoes.size()):
+		botoes[i].text = \"\"
+		
+func _on_botao_pressed(compare_button):
+	if compare_button.text == str(resultado):
+		pontos+=0.5
+		comecar_jogo()
+		
+	else:
+		emit_signal(\"pontuacao\",self, pontos)
+		print(\"mandando sinal para o jogo\")
+		get_tree().quit()
+		
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_v851u"]
+font_size = 58
+
+[node name="jogo_Aritimetica" type="Node2D"]
+position = Vector2(0, 3)
+script = SubResource("GDScript_rnpmt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+show_behind_parent = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_vertical = 3
+
+[node name="start" type="Button" parent="CanvasLayer/Control"]
+top_level = true
+layout_mode = 0
+offset_left = 286.0
+offset_top = 443.0
+offset_right = 829.0
+offset_bottom = 575.0
+text = "começar"
+
+[node name="Panel" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.575
+anchor_bottom = -0.575
+offset_left = 3.0
+offset_top = 20.0
+offset_right = 1132.0
+offset_bottom = 358.0
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "responda o maximo de perguntas
+para aumentar seu dano"
+label_settings = SubResource("LabelSettings_v851u")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -1.0
+offset_top = -3.0
+offset_right = 1163.0
+offset_bottom = 651.0
+mouse_filter = 2
+color = Color(0.187618, 0.246422, 0.437281, 1)
+
+[node name="buttons_content" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 388.0
+offset_right = 1122.0
+offset_bottom = 559.0
+theme_override_constants/separation = 50
+
+[node name="Button2" type="Button" parent="CanvasLayer/Control/buttons_content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button4" type="Button" parent="CanvasLayer/Control/buttons_content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button3" type="Button" parent="CanvasLayer/Control/buttons_content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/buttons_content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="CanvasLayer/Control/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/buttons_content/Button" to="." method="_on_button_pressed"]
