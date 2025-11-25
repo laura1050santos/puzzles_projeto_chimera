@@ -11,9 +11,15 @@ config_version=5
 [application]
 
 config/name="minigames"
-run/main_scene="res://Scenes/mini_games.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+BddProbabilidade="*res://Scripts/models/BDD_probabilidade.gd"
+BddGeo="*res://Scripts/models/BDD_geo.gd"
+BddFunc="*res://Scripts/models/BDD_func.gd"
+BddArit="*res://Scripts/models/BDD_arit.gd"
 
 [rendering]
 
